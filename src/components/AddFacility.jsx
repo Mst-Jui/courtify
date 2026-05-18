@@ -1,5 +1,7 @@
+'use client'
 import { Card } from '@heroui/react';
 import React from 'react';
+import toast from 'react-hot-toast';
 import {
   FaFutbol,
   FaMapMarkerAlt,
@@ -12,16 +14,39 @@ import {
 } from 'react-icons/fa';
 
 const AddFacility = () => {
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const facilities = Object.fromEntries(formData.entries())
+
+   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities`,{
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(facilities)
+   });
+
+   const data = await res.json()
+
+  if(data){
+    toast.success('Facility added successfully!');
+  }
+  if(!data){
+    toast.error('Failed to add facility!');
+  }
+
+  }
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 py-12 px-4 sm:px-6 lg:px-8 font-sans relative overflow-hidden flex items-center justify-center">
-      
+
       {/* Background Glowing Orbs for Glassmorphism */}
       <div className="absolute top-20 right-10 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-20 left-10 w-96 h-96 bg-teal-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
       {/* Main Glass Container */}
       <div className="max-w-3xl w-full bg-slate-900/40 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/10 relative z-10">
-        
+
         {/* Header */}
         <div className="mb-8 border-b border-white/10 pb-4">
           <h2 className="text-3xl font-bold tracking-tight text-slate-100 flex items-center gap-2">
@@ -35,12 +60,12 @@ const AddFacility = () => {
         {/* Form Wrap inside HeroUI Card */}
         <Card className="bg-transparent border-0 shadow-none">
           <form className="space-y-6"
-          //  onSubmit={(e) => e.preventDefault()}
-           >
-            
+            onSubmit={onSubmit}
+          >
+
             {/* Grid Layout for Fields */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              
+
               {/* Facility Name */}
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">
@@ -90,7 +115,7 @@ const AddFacility = () => {
               {/* Image Upload Link */}
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-2">
-                  Image URL (imgbb / postimage)
+                  Image URL (postimage)
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
@@ -100,7 +125,7 @@ const AddFacility = () => {
                     type="url"
                     name="image"
                     required
-                    placeholder="https://imgbb.com/your-uploaded-image"
+                    placeholder="Enter image URL"
                     className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:bg-white/10 transition-all text-sm"
                   />
                 </div>
@@ -185,7 +210,7 @@ const AddFacility = () => {
               </div>
 
               {/* Owner Email (Auto-filled / Read-Only Field) */}
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-slate-400 mb-2">
                   Owner Email (Auto-filled)
                 </label>
@@ -201,7 +226,7 @@ const AddFacility = () => {
                     className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/5 rounded-xl text-slate-500 cursor-not-allowed text-sm focus:outline-none"
                   />
                 </div>
-              </div>
+              </div> */}
 
             </div>
 
