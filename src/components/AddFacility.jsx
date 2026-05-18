@@ -1,5 +1,7 @@
 'use client'
+import { authClient } from '@/lib/auth-client';
 import { Card } from '@heroui/react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import toast from 'react-hot-toast';
 import {
@@ -14,27 +16,38 @@ import {
 } from 'react-icons/fa';
 
 const AddFacility = () => {
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+
+  if (isPending) {
+    // return <p>Loading...</p>;
+    toast('Ops!')
+  }
+
+
+  const router = useRouter();
   const onSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const facilities = Object.fromEntries(formData.entries())
 
-   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities`,{
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify(facilities)
-   });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(facilities)
+    });
 
-   const data = await res.json()
+    const data = await res.json()
 
-  if(data){
-    toast.success('Facility added successfully!');
-  }
-  if(!data){
-    toast.error('Failed to add facility!');
-  }
+    if (data) {
+      toast.success('Facility added successfully!');
+      router.push('/all-facilities')
+    }
+    if (!data) {
+      toast.error('Failed to add facility!');
+    }
 
   }
   return (
@@ -210,7 +223,7 @@ const AddFacility = () => {
               </div>
 
               {/* Owner Email (Auto-filled / Read-Only Field) */}
-              {/* <div>
+              <div>
                 <label className="block text-sm font-medium text-slate-400 mb-2">
                   Owner Email (Auto-filled)
                 </label>
@@ -222,11 +235,12 @@ const AddFacility = () => {
                     type="email"
                     name="owner_email"
                     readOnly
-                    value="current-user@example.com"
+                    // value="current-user@example.com"
+                    value={user?.email || ""}
                     className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/5 rounded-xl text-slate-500 cursor-not-allowed text-sm focus:outline-none"
                   />
                 </div>
-              </div> */}
+              </div>
 
             </div>
 

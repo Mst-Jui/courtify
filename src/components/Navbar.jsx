@@ -1,9 +1,28 @@
+'use client'
 import Image from 'next/image';
 import React from 'react';
 import NavLink from './NavLink';
 import Link from 'next/link';
+import { authClient } from '@/lib/auth-client';
+import { Avatar, Button } from '@heroui/react';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
+  const router = useRouter();
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+
+  if (isPending) {
+    return <p>Loading...</p>;
+    // toast('Ops!')
+  }
+  console.log("user from nav", user);
+
+  const handleSignOut = async () => {
+    await authClient.signOut();
+    router.push('/')
+  }
+
   return (
     <div>
       <div className="navbar bg-base-100 shadow-sm">
@@ -14,22 +33,38 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-              <li>
-                <NavLink href={"/"}>Home</NavLink>
-              </li>
-              <li>
-                <NavLink href={"/all-facilities"}>All Facilities</NavLink>
-              </li>
-              <li>
-                <NavLink href={"/my-bookings"}>My Bookings</NavLink>
-              </li>
-              <li>
-                <NavLink href={"/add-facility"}>Add Facility</NavLink>
-              </li>
-              <li>
-                <NavLink href={"/manage-my-facilities"}>Manage My Facilities</NavLink>
-              </li>
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-100 mt-3 w-52 p-2 shadow">
+
+              {
+                user ?
+                  <>
+                    <li>
+                      <NavLink href={"/"}>Home</NavLink>
+                    </li>
+                    <li>
+                      <NavLink href={"/all-facilities"}>All Facilities</NavLink>
+                    </li>
+                    <li>
+                      <NavLink href={"/my-bookings"}>My Bookings</NavLink>
+                    </li>
+                    <li>
+                      <NavLink href={"/add-facility"}>Add Facility</NavLink>
+                    </li>
+                    <li>
+                      <NavLink href={"/manage-my-facilities"}>Manage My Facilities</NavLink>
+                    </li>
+                  </>
+                  :
+                  <>
+                    <li>
+                      <NavLink href={"/"}>Home</NavLink>
+                    </li>
+                    <li>
+                      <NavLink href={"/all-facilities"}>All Facilities</NavLink>
+                    </li>
+                  </>
+              }
+
             </ul>
           </div>
 
@@ -46,67 +81,115 @@ const Navbar = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            <li>
-              <NavLink href={"/"}>Home</NavLink>
-            </li>
-            <li>
-              <NavLink href={"/all-facilities"}>All Facilities</NavLink>
-            </li>
-            <li>
-              <NavLink href={"/my-bookings"}>My Bookings</NavLink>
-            </li>
-            <li>
-              <NavLink href={"/add-facility"}>Add Facility</NavLink>
-            </li>
-            <li>
-              <NavLink href={"/manage-my-facilities"}>Manage My Facilities</NavLink>
-            </li>
+            {
+              user ?
+                <>
+                  <li>
+                    <NavLink href={"/"}>Home</NavLink>
+                  </li>
+                  <li>
+                    <NavLink href={"/all-facilities"}>All Facilities</NavLink>
+                  </li>
+                  <li>
+                    <NavLink href={"/my-bookings"}>My Bookings</NavLink>
+                  </li>
+                  <li>
+                    <NavLink href={"/add-facility"}>Add Facility</NavLink>
+                  </li>
+                  <li>
+                    <NavLink href={"/manage-my-facilities"}>Manage My Facilities</NavLink>
+                  </li>
+                </>
+                :
+                <>
+                  <li>
+                    <NavLink href={"/"}>Home</NavLink>
+                  </li>
+                  <li>
+                    <NavLink href={"/all-facilities"}>All Facilities</NavLink>
+                  </li>
+                </>
+            }
+
           </ul>
         </div>
         <div className="navbar-end">
           {/* Register  */}
 
-          <Link href={"/register"}>
-            <button
-              className="px-8 py-4 bg-gradient-to-r from-emerald-600 to-emerald-400 hover:from-emerald-800 hover:to-emerald-500 text-neutral-950 font-bold rounded-xl shadow-lg shadow-emerald-500/20 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 "
-            >
-              Sign Up
-            </button>
-          </Link>
+          {
+            user ?
+              <>
+                <div className="dropdown dropdown-end">
+                  <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                    <div className="w-10 rounded-full overflow-hidden">
+                      {
+                        user?.image ? (
+                          <Image
+                            referrerPolicy="no-referrer"
+                            alt={user?.name || "User"}
+                            width={40}
+                            height={40}
+                            className="w-full h-full object-cover"
+                            src={user.image}
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-emerald-600 text-white flex items-center justify-center font-bold">
+                            {user?.name?.charAt(0).toUpperCase()}
+                          </div>
+                        )
+                      }
+                    </div>
+                  </div>
 
-          {/* dropdown  */}
-          <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <Image
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                  width={20}
-                  height={20}
-                />
-              </div>
-            </div>
-            <ul
-              tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow font-semibold">
-              <li>
-                <a className="justify-between">
-                  Profile
-                  {/* <span className="badge">New</span> */}
-                </a>
-              </li>
-              <li>
-                <NavLink href={"/my-bookings"}>My Bookings</NavLink>
-              </li>
-              <li>
-                <NavLink href={"/add-facility"}>Add Facility</NavLink>
-              </li>
-              <li>
-                <NavLink href={"/manage-my-facilities"}>Manage My Facilities</NavLink>
-              </li>
-              <li className='text-red-500'><a>Logout</a></li>
-            </ul>
-          </div>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[100] mt-3 w-52 p-2 shadow font-semibold"
+                  >
+                    <li>
+                      <a className="justify-between">
+                        Profile
+                      </a>
+                    </li>
+
+                    <li>
+                      <NavLink href={"/my-bookings"}>My Bookings</NavLink>
+                    </li>
+
+                    <li>
+                      <NavLink href={"/add-facility"}>Add Facility</NavLink>
+                    </li>
+
+                    <li>
+                      <NavLink href={"/manage-my-facilities"}>
+                        Manage My Facilities
+                      </NavLink>
+                    </li>
+
+                    <li>
+                      <Button
+                        size="sm"
+                        onClick={handleSignOut}
+                        className="rounded-none text-red-500"
+                        variant="danger"
+                      >
+                        Signout
+                      </Button>
+                    </li>
+                  </ul>
+                </div>
+              </>
+              :
+              <>
+                <Link href={"/register"}>
+                  <button
+                    className="px-8 py-4 bg-gradient-to-r from-emerald-600 to-emerald-400 hover:from-emerald-800 hover:to-emerald-500 text-neutral-950 font-bold rounded-xl shadow-lg shadow-emerald-500/20 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 "
+                  >
+                    Sign Up
+                  </button>
+                </Link>
+              </>
+          }
+
         </div>
       </div>
     </div>
