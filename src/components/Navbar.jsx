@@ -16,7 +16,7 @@ const Navbar = () => {
     return <p>Loading...</p>;
     // toast('Ops!')
   }
-  console.log("user from nav", user);
+  // console.log("user from nav", user);
 
   const handleSignOut = async () => {
     await authClient.signOut();

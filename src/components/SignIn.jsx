@@ -26,11 +26,13 @@ const SignIn = () => {
       email: user.email,
       password: user.password
     })
+    console.log("DATA", data);
+    
     if (data) {
       router.push('/')
     }
     if (error) {
-      alert('Error')
+      alert('Error from signin')
     }
 
   }

@@ -2,12 +2,21 @@
 import React from 'react';
 import { MapPin, Users, Calendar, Clock, DollarSign, Shield, Activity, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 const FacilitiesDetailsPage = async ({ params }) => {
 
-  const { id } = await params
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities/${id}`)
-  const facility = await res.json()
+  const { id } = await params;
+  const { token } = await auth.api.getToken({
+    headers: await headers()
+  })
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities/${id}`, {
+    headers: {
+      authorization: `Bearer ${token}`
+    }
+  });
+  const facility = await res.json();
 
   const { _id, name, facility_type, image, location, price_per_hour, capacity, description, booking_count, available_slots } = facility
 
@@ -83,9 +92,12 @@ const FacilitiesDetailsPage = async ({ params }) => {
                 </div>
                 <div className='bg-neutral-900/40 border border-neutral-800/40 p-4 rounded-xl space-y-1'>
                   <p className="text-xs text-neutral-500 uppercase font-bold">Available Time Slot</p>
-                  {available_slots.map((slot, index) => (
-                    <option key={index} value={slot}>{slot}</option>
-                  ))}
+                  {Array.isArray(available_slots) &&
+                    available_slots.map((slot, index) => (
+                      <span key={index} className="px-2 py-1 text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">
+                        {slot}
+                      </span>
+                    ))}
                 </div>
                 {/* <div className="bg-neutral-900/40 border border-neutral-800/40 p-4 rounded-xl space-y-1">
                   <p className="text-xs text-neutral-500 uppercase font-bold">Host Email</p>
@@ -99,7 +111,7 @@ const FacilitiesDetailsPage = async ({ params }) => {
 
 
             {/* Right Column: Premium Booking Form Area */}
-            <div className="lg:col-span-5 bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-xl space-y-6">
+            <div className="lg:col-span-5 w-full max-w-full min-w-0 bg-neutral-900 border border-neutral-800 rounded-2xl p-4 sm:p-6 shadow-xl space-y-6 box-border overflow-hidden">
               <div>
                 <h2 className="text-xl font-bold text-white">Secure Your Slot</h2>
                 <p className="text-xs text-neutral-400 mt-1">Fill out the reservation card to finalize booking parameters.</p>
@@ -131,18 +143,28 @@ const FacilitiesDetailsPage = async ({ params }) => {
                 </div>
 
                 {/* Time Slot Custom Dropdown */}
+                {/* Time Slot Custom Dropdown - Fixed Overflow */}
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-neutral-300 flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-emerald-500" /> Available Time Slot
+                    <Clock className="w-3.5 h-3.5 text-emerald-400" /> Available Time Slot
                   </label>
-                  <select
-                    className="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-3 rounded-xl text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors cursor-pointer"
-                  >
-                    <option value="" className="text-neutral-500">Choose an available slot</option>
-                    {available_slots.map((slot, index) => (
-                      <option key={index} value={slot}>{slot}</option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <select
+                      required
+                      className="w-full bg-slate-950 border border-white/10 text-white px-4 py-3 pr-10 rounded-xl text-sm focus:outline-none focus:border-emerald-500 transition-colors cursor-pointer appearance-none max-w-full"
+                    >
+                      <option value="" className="bg-slate-950 text-slate-500">Choose an available slot</option>
+                      {Array.isArray(available_slots) &&
+                        available_slots.map((slot, index) => (
+                          <option key={index} value={slot} className="bg-slate-950 text-white">
+                            {slot}
+                          </option>
+                        ))}
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400 text-xs">
+                      ▼
+                    </div>
+                  </div>
                 </div>
 
                 {/* Duration Hours Input */}

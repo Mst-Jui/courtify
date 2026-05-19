@@ -1,8 +1,8 @@
 'use client'
+import React, { useEffect, useState } from 'react';
 import { authClient } from '@/lib/auth-client';
 import { Card } from '@heroui/react';
 import { useRouter } from 'next/navigation';
-import React from 'react';
 import toast from 'react-hot-toast';
 import {
   FaFutbol,
@@ -16,40 +16,70 @@ import {
 } from 'react-icons/fa';
 
 const AddFacility = () => {
-  const { data: session, isPending } = authClient.useSession();
+
+  const [tokenData, setTokenData] = useState(null);
+  useEffect(() => {
+    const getToken = async () => {
+      const { data } = await authClient.token();
+      console.log("datta", data);
+
+      setTokenData(data);
+    };
+    getToken();
+  }, []);
+
+
+
+  //  user 
+  const { data: session, } = authClient.useSession();
   const user = session?.user;
-
-  if (isPending) {
-    // return <p>Loading...</p>;
-    toast('Ops!')
-  }
-
-
   const router = useRouter();
+
   const onSubmit = async (e) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    const facilities = Object.fromEntries(formData.entries())
+    e.preventDefault();
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(facilities)
-    });
+   
 
-    const data = await res.json()
+    const formData = new FormData(e.currentTarget);
+    const facilities = Object.fromEntries(formData.entries());
+    const formatted = {
+      ...facilities,
+      available_slots: facilities.available_slots
+        ? facilities.available_slots.split(",").map((s) => s.trim())
+        : [],
+    };
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/facilities`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`,
+        },
+        body: JSON.stringify(formatted),
+      }
+    );
+
+    //  console.log("TOKEN STATE:", tokenData);
+    // console.log(" TOKEN VALUE:", tokenData?.token);
+
+    if (!res.ok) {
+      toast.error("Failed to add facility");
+      return;
+    }
+
+    const data = await res.json();
+    // console.log("jfmkm", data);
+    
 
     if (data) {
-      toast.success('Facility added successfully!');
-      router.push('/all-facilities')
-    }
-    if (!data) {
-      toast.error('Failed to add facility!');
+      toast.success("Facility added successfully!");
+      router.push("/all-facilities");
     }
 
-  }
+  };
+
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 py-12 px-4 sm:px-6 lg:px-8 font-sans relative overflow-hidden flex items-center justify-center">
 
@@ -216,7 +246,7 @@ const AddFacility = () => {
                     type="text"
                     name="available_slots"
                     required
-                    placeholder="e.g., 06:00 AM - 11:00 PM"
+                    placeholder="06:00 AM,07:00 AM,08:00 AM"
                     className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:bg-white/10 transition-all text-sm"
                   />
                 </div>
