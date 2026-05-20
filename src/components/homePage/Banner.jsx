@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const Banner = () => {
@@ -42,18 +43,15 @@ const Banner = () => {
           </p>
 
           <div className="pt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <button
-              // onClick={handleScrollToFacilities}
-              className="py-2 px-3 bg-gradient-to-r from-emerald-600 to-emerald-400 hover:from-emerald-800 hover:to-emerald-500 text-neutral-950 font-bold rounded-xl shadow-lg shadow-emerald-500/20 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-neutral-900"
-            >
-              Explore Facilities
-            </button>
-            <a
-              href="#how-it-works"
-              className="px-8 py-4 bg-neutral-800/80 hover:bg-neutral-800 border border-neutral-700 hover:border-neutral-600 text-white font-semibold rounded-xl transition-all duration-200 backdrop-blur-sm text-center"
-            >
-              Learn More
-            </a>
+            <Link href={'/all-facilities'}>
+              <button
+                // onClick={handleScrollToFacilities}
+                className="py-2 px-3 bg-gradient-to-r from-emerald-600 to-emerald-400 hover:from-emerald-800 hover:to-emerald-500 text-neutral-950 font-bold rounded-xl shadow-lg shadow-emerald-500/20 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-neutral-900"
+              >
+                Explore Facilities
+              </button>
+            </Link>
+
           </div>
 
           {/* Mini Stats (Adds premium UI/Recruiter appeal) */}
