@@ -4,6 +4,7 @@ import { Button, Card } from '@heroui/react';
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
 import React from 'react';
+import toast from 'react-hot-toast';
 import {
   FaUser,
   FaEnvelope,
@@ -21,7 +22,7 @@ const Register = () => {
     const user = Object.fromEntries(formData.entries())
 
     console.log("USER", user);
-    
+
     const { data, error } = await authClient.signUp.email({
       email: user.email,
       password: user.password,
@@ -33,7 +34,7 @@ const Register = () => {
       // redirect('/')
     }
     if (error) {
-      alert('Error')
+      toast('Invalid')
     }
 
   }
@@ -96,6 +97,8 @@ const Register = () => {
                   required
                   type="email"
                   placeholder="Enter your email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  title="Please enter a valid email address"
                   className="w-full pl-10 pr-4 py-2.5 bg-slate-800/50 border border-slate-700 rounded-xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:bg-slate-800 transition-all text-sm"
                 />
               </div>
@@ -143,8 +146,8 @@ const Register = () => {
 
             {/* Button */}
             <Button
-              type="submit"
-              className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-xl transition-colors shadow-lg shadow-emerald-900/20"
+              type="submit"             
+              className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-medium  transition-colors shadow-lg shadow-emerald-900/20"
             >
               Sign Up
             </Button>

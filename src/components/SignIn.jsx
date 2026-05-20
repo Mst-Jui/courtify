@@ -4,6 +4,7 @@ import { Button, Card } from '@heroui/react';
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
 import React from 'react';
+import toast from 'react-hot-toast';
 import {
   FaUser,
   FaEnvelope,
@@ -32,7 +33,7 @@ const SignIn = () => {
       router.push('/')
     }
     if (error) {
-      alert('Error from signin')
+      toast('Error from signin')
     }
 
   }

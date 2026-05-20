@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Courtify - Sports Facility Booking Management System
 
-## Getting Started
+## 🌐 Live Website
+[Add Your Live Website Link Here]
 
-First, run the development server:
+---
+
+## 📂 Client Repository
+https://github.com/Mst-Jui/courtify
+
+---
+
+## 📂 Server Repository
+https://github.com/Mst-Jui/courtify-server
+
+---
+# 🎯 Purpose
+
+The purpose of SportNest is to provide a modern and user-friendly sports facility booking platform where users can easily explore, book, and manage sports venues online. The system helps simplify the booking process for both users and facility owners by offering secure authentication, real-time facility management, and booking tracking features.
+
+---
+# 📖 Project Overview
+
+Courtify is a full-stack sports facility booking platform built with the MERN Stack and Better Auth Authentication. Users can explore different sports facilities such as football turfs, badminton courts, swimming lanes, and tennis courts, then book available slots based on their preferred date and time.
+
+The platform includes authentication, protected routes, booking management, facility CRUD operations, search & filtering functionality, responsive design, and secure API handling.
+
+---
+
+# ✨ Features
+
+- User Authentication with Better Auth
+- Email & Password Login
+- Google Authentication
+- JWT Authentication with HTTPOnly Cookies
+- Protected Private Routes
+- Browse All Sports Facilities
+- Featured Facilities Section
+- Facility Details & Booking System
+- Add New Facility
+- Update/Delete Own Facilities
+- Manage User Bookings
+- Cancel Bookings
+- Search Facilities by Name
+- Filter Facilities by Sport Type
+- Loading Spinner
+- Custom 404 Page
+- Responsive Design for Mobile, Tablet & Desktop  
+- Toast Notifications
+- Secure Environment Variables
+---
+# 📦 NPM Packages Used
+
+## Client Side Packages
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+next
+react  
+tailwindcss
+daisyui
+@heroui/react
+framer-motion
+react-icons
+react-hot-toast
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+# 🛠️ Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Frontend
+- Next.js
+- React.js
+- Tailwind CSS
+- DaisyUI
+- HeroUI
+- Framer Motion
+- React Icons
+- React Hot Toast
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Backend
+- Node.js
+- Express.js
+- MongoDB
+- Better Auth
+- JWT
+- Cookie Parser
+- CORS
+- Dotenv
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+# 📄 Main Pages
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Home Page
+- All Facilities Page
+- Facility Details Page
+- Add Facility Page
+- Manage My Facilities Page
+- My Bookings Page
+- Login Page
+- Register Page
+- Custom 404 Page
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+# 🔐 Authentication Features
+
+- Secure Login System
+- Google Login
+- Protected Routes
+- Persistent Login Session
+- JWT Token Verification
+- HTTPOnly Cookie Security
+
+---
+
