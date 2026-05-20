@@ -4,6 +4,8 @@ import { MapPin, Users, Calendar, Clock, DollarSign, Shield, Activity, ArrowRigh
 import Image from 'next/image';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
+import BookingCard from '@/components/BookingCard';
+import BookingForm from '@/components/BookingForm';
 
 const FacilitiesDetailsPage = async ({ params }) => {
 
@@ -117,94 +119,8 @@ const FacilitiesDetailsPage = async ({ params }) => {
                 <p className="text-xs text-neutral-400 mt-1">Fill out the reservation card to finalize booking parameters.</p>
               </div>
 
-              <form
-                // onSubmit={(e) => e.preventDefault()}
-                className="space-y-4">
-                {/* Facility Name (Read-Only Field) */}
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-neutral-400">Target Facility</label>
-                  <input
-                    type="text"
-                    value={name}
-                    disabled
-                    className="w-full bg-neutral-950 border border-neutral-800 text-neutral-400 px-4 py-3 rounded-xl text-sm font-medium cursor-not-allowed"
-                  />
-                </div>
+              <BookingForm facility={facility} />
 
-                {/* Booking Date Selector */}
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-neutral-300 flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-emerald-500" /> Select Date
-                  </label>
-                  <input
-                    type="date"
-                    className="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-3 rounded-xl text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
-                  />
-                </div>
-
-                {/* Time Slot Custom Dropdown */}
-                {/* Time Slot Custom Dropdown - Fixed Overflow */}
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-neutral-300 flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-emerald-400" /> Available Time Slot
-                  </label>
-                  <div className="relative">
-                    <select
-                      required
-                      className="w-full bg-slate-950 border border-white/10 text-white px-4 py-3 pr-10 rounded-xl text-sm focus:outline-none focus:border-emerald-500 transition-colors cursor-pointer appearance-none max-w-full"
-                    >
-                      <option value="" className="bg-slate-950 text-slate-500">Choose an available slot</option>
-                      {Array.isArray(available_slots) &&
-                        available_slots.map((slot, index) => (
-                          <option key={index} value={slot} className="bg-slate-950 text-white">
-                            {slot}
-                          </option>
-                        ))}
-                    </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400 text-xs">
-                      ▼
-                    </div>
-                  </div>
-                </div>
-
-                {/* Duration Hours Input */}
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-neutral-300 flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-emerald-500" /> Reservation Hours
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    placeholder="e.g. 2"
-                    className="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-3 rounded-xl text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
-                  />
-                </div>
-
-                {/* Cost Summary Box */}
-                <div className="bg-neutral-950 border border-neutral-800/80 rounded-xl p-4 space-y-2.5">
-                  <div className="flex justify-between items-center text-xs text-neutral-400">
-                    <span>Base Rate</span>
-                    <span>${price_per_hour} / hr</span>
-                  </div>
-                  <div className="h-px bg-neutral-800/60" />
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-semibold text-neutral-300">Total Price</span>
-                    <span className="text-lg font-bold text-emerald-400 flex items-center">
-                      <DollarSign className="w-4 h-4 shrink-0" />90.00
-                    </span>
-                  </div>
-                </div>
-
-                {/* Form Action Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-neutral-950 font-bold rounded-xl shadow-lg shadow-emerald-500/10 transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2 group"
-                >
-                  <span>Confirm Reservation</span>
-                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-                </button>
-
-              </form>
             </div>
 
           </div>
