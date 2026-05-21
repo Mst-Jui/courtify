@@ -26,7 +26,7 @@ export default function NotFound() {
         {/* Button with your brand color */}
         <Link
           href="/"
-          className="inline-block px-8 py-3 text-sm font-semibold text-white transition-all duration-300 bg-[#00A86B] rounded-full hover:bg-[#008f5a] hover:shadow-[0_0_20px_rgba(0,168,107,0.5)] active:scale-95"
+          className="inline-block px-8 py-3 text-sm font-semibold text-black transition-all duration-300 bg-[#00A86B] rounded-xl py-4  hover:bg-[#008f5a] hover:shadow-[0_0_20px_rgba(0,168,107,0.5)] active:scale-95"
         >
           BACK HOME
         </Link>

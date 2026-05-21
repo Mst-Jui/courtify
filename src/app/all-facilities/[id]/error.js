@@ -27,7 +27,7 @@ export default function Error({ error }) {
 
         <Link
           href="/"
-          className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#00C882] text-black font-semibold hover:bg-[#00A86F] transition-all"
+          className="flex items-center gap-2 px-6 py-4 rounded-xl bg-[#00C882] text-black font-semibold hover:bg-[#00A86F] transition-all"
         >
           <ArrowLeft size={18} /> Back Home
           
