@@ -13,13 +13,16 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+    // if autoSignIn false then better-auth creating new user with existing email
+    autoSignIn: false,
+    requireEmailVerification: false,
   },
-   socialProviders: {
-        google: { 
-            clientId: process.env.GOOGLE_CLIENT_ID, 
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET, 
-        }, 
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     },
+  },
   session: {
     cookieCache: {
       enabled: true,
