@@ -46,7 +46,7 @@ const Banner = () => {
             <Link href={'/all-facilities'}>
               <button
                 // onClick={handleScrollToFacilities}
-                className="py-2 px-3 bg-gradient-to-r from-emerald-600 to-emerald-400 hover:from-emerald-800 hover:to-emerald-500 text-neutral-950 font-bold rounded-xl shadow-lg shadow-emerald-500/20 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-neutral-900"
+                className="py-4 px-3 bg-gradient-to-r from-emerald-600 to-emerald-400 hover:from-emerald-800 hover:to-emerald-500 text-neutral-950 font-bold rounded-xl shadow-lg shadow-emerald-500/20 transform hover:-translate-y-0.5 transition-all duration-200 focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-neutral-900"
               >
                 Explore Facilities
               </button>

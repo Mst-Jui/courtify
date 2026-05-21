@@ -29,7 +29,7 @@ const AuthInspire = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/register">
             <Button
-              className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-6 px-8 rounded-xl text-lg transition-all shadow-lg shadow-emerald-900/20 w-full sm:w-auto"
+              className="bg-emerald-600 hover:bg-emerald-500 text-black font-bold py-4 px-8 rounded-xl text-lg transition-all shadow-lg shadow-emerald-900/20 w-full sm:w-auto"
               endContent={<FaArrowRight />}
             >
               Get Started Now
