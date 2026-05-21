@@ -5,6 +5,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { MdOutlineMail } from "react-icons/md";
 import { FaFacebook, FaLinkedinIn, FaQuoteLeft, FaTwitter } from "react-icons/fa";
 import { IoIosFootball } from "react-icons/io";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -90,7 +91,7 @@ const Footer = () => {
             <Link href="#" className="hover:text-white transition">Terms</Link>
             <div className="flex gap-4">
               <FaFacebook className="hover:text-emerald-500 cursor-pointer" />
-              <FaTwitter className="hover:text-emerald-500 cursor-pointer" />
+              <FaXTwitter className="hover:text-emerald-500 cursor-pointer" />
               <IoLogoInstagram className="hover:text-emerald-500 cursor-pointer" />
             </div>
           </div>

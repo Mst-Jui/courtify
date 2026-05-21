@@ -30,7 +30,7 @@ const Register = () => {
       image: user?.image
     })
     if (data) {
-      router.push('/')
+      router.push('/signin')
       // redirect('/')
     }
     if (error) {

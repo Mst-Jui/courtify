@@ -4,7 +4,6 @@ import { Button, Card } from '@heroui/react';
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
 import React from 'react';
-import toast from 'react-hot-toast';
 import {
   FaUser,
   FaEnvelope,
@@ -49,11 +48,11 @@ const SignIn = () => {
           </div>
 
           <h2 className="text-2xl font-bold text-slate-100 tracking-tight">
-            Create your account
+            Get back in the game
           </h2>
 
           <p className="mt-2 text-sm text-slate-400">
-            Join us to book your favorite sports facilities
+            Continue your sports journey with seamless bookings
           </p>
         </div>
 
