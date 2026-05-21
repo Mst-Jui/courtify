@@ -120,7 +120,7 @@ function EditFacilities({ facility }) {
               ✕
             </button>
 
-            <h3 className="font-bold text-xl text-slate-100 border-b border-white/5 pb-4 mb-6">
+            <h3 className="font-bold text-xl text-slate-100 border-b border-white/5 pb-4 mb-6 pt-10">
               Edit Facility Details
             </h3>
             
