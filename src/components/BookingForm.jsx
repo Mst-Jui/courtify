@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Calendar, Clock, DollarSign } from 'lucide-react'; // DollarSign আইকনটি যোগ করা হয়েছে
+import { Calendar, Clock, DollarSign } from 'lucide-react'; // DollarSign 
 import BookingCard from './BookingCard';
 
 const BookingForm = ({ facility }) => {
@@ -10,7 +10,7 @@ const BookingForm = ({ facility }) => {
     hours: 1
   });
 
-  // টোটাল প্রাইস ক্যালকুলেট করা হচ্ছে
+ 
   const totalPrice = facility.price_per_hour * bookingInfo.hours;
 
   return (
@@ -33,7 +33,7 @@ const BookingForm = ({ facility }) => {
         <input type="number" min="1" defaultValue={1} onChange={(e) => setBookingInfo({...bookingInfo, hours: Number(e.target.value)})} className="w-full bg-neutral-950 border border-neutral-800 p-3 rounded-xl text-white" />
       </div>
 
-      {/* নতুন টোটাল প্রাইস ফিল্ড */}
+     
       <div className="space-y-1">
         <label className="text-xs text-neutral-400">Total Price</label>
         <div className="flex items-center w-full bg-neutral-950 border border-emerald-500/30 p-3 rounded-xl text-emerald-400 font-bold">

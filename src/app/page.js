@@ -15,8 +15,6 @@ export default function Home() {
       <AuthInspire />
       <SpotlightSection />
       <PremiumSection />
-
-
     </div>
   );
 }

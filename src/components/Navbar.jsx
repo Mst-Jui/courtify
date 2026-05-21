@@ -20,8 +20,7 @@ const Navbar = () => {
   }
 
   return (
-    // 'sticky top-0 z-50' স্ক্রল করার সময় উপরে আটকে রাখবে
-    // 'bg-neutral-950/80 backdrop-blur-xl' সব ডিভাইসের জন্য ডার্ক গ্লাস ইফেক্ট দিবে
+    
     <div className="sticky top-0 z-50 w-full bg-neutral-950/80 backdrop-blur-xl border-b border-white/10 shadow-lg">
 
       <div className="navbar min-h-[56px] container mx-auto px-4">

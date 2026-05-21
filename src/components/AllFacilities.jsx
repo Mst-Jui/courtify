@@ -13,7 +13,7 @@ const AllFacilities = () => {
           </h2>
         </div>
 
-        {/* এখানে নতুন কম্পোনেন্টটি বসিয়ে দিন */}
+        
         <FacilitySearch />
         
       </div>

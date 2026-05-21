@@ -12,7 +12,7 @@ const FacilitySearch = () => {
 
   useEffect(() => {
     setLoading(true);
-    // ব্যাকএন্ডে টাইপগুলো অ্যারে হিসেবে পাঠানোর জন্য URLSearchParams ব্যবহার করা ভালো
+   
     const params = new URLSearchParams();
     if (search) params.append("search", search);
     selectedTypes.forEach((type) => params.append("type", type));

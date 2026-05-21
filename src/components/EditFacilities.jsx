@@ -11,7 +11,7 @@ function EditFacilities({ facility }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  // সেফটি ফলব্যাক: ডাটা না থাকলে বাটন ডিজেবল থাকবে যেন এরর টোস্ট না আসে
+ 
   if (!facility) {
     return (
       <button disabled className="p-2 opacity-40 bg-slate-800 text-slate-500 rounded-xl cursor-not-allowed">
@@ -28,7 +28,7 @@ function EditFacilities({ facility }) {
 
     const formData = new FormData(e.currentTarget);
     
-    // প্রতিটি ইনপুট ফিল্ড থেকে জেনুইন ভ্যালু আলাদা করা হচ্ছে
+    
     const nameValue = formData.get('name');
     const facilityTypeValue = formData.get('facility_type');
     const capacityValue = formData.get('capacity');
@@ -37,12 +37,12 @@ function EditFacilities({ facility }) {
     const locationValue = formData.get('location');
     const availableSlotsRaw = formData.get('available_slots');
 
-    // টাইম স্লট স্ট্রিং-কে প্রপার অ্যারেতে রূপান্তর
+   
     const slotsArray = availableSlotsRaw && typeof availableSlotsRaw === 'string'
       ? availableSlotsRaw.split(',').map(slot => slot.trim()).filter(Boolean)
       : [];
 
-    // ডাটাবেজের স্কিমা অনুযায়ী স্ট্রিং থেকে নাম্বারে কনভার্ট নিশ্চিত করা হলো
+  
     const submissionData = {
       name: nameValue,
       facility_type: facilityTypeValue,
@@ -70,7 +70,7 @@ function EditFacilities({ facility }) {
         setIsOpen(false);
         router.refresh();
       } else {
-        // ব্যাকএন্ড থেকে আসা আসল এরর মেসেজ কনসোলে প্রিন্ট করার ব্যবস্থা
+        
         const errorData = await res.json().catch(() => ({}));
         console.error("Backend Error Details:", errorData);
         toast.error(errorData?.message || "Failed to update facility.");
@@ -89,7 +89,7 @@ function EditFacilities({ facility }) {
 
   return (
     <>
-      {/* এডিট বাটন */}
+      
       <button 
         type="button"
         onClick={() => setIsOpen(true)}
@@ -98,20 +98,20 @@ function EditFacilities({ facility }) {
         <FaEdit size={14} />
       </button>
 
-      {/* কাস্টম পিওর CSS মডাল */}
+      
       {isOpen && (
         <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4">
           
-          {/* ব্যাকড্রপ ব্লার লেয়ার */}
+          
           <div 
             className="fixed inset-0 bg-black/70 backdrop-blur-md transition-opacity"
             onClick={() => !isUpdating && setIsOpen(false)}
           />
 
-          {/* মডাল কন্টেইনার বক্স */}
+          
           <div className="relative w-full max-w-xl transform overflow-hidden rounded-2xl border border-white/10 bg-slate-900 p-6 text-left shadow-2xl transition-all z-[100000] max-h-[90vh] overflow-y-auto">
             
-            {/* ক্লোজ বাটন */}
+            
             <button 
               type="button"
               onClick={() => setIsOpen(false)}
@@ -172,7 +172,7 @@ function EditFacilities({ facility }) {
 
               </div>
 
-              {/* অ্যাকশন বাটনসমূহ */}
+              
               <div className="border-t border-white/5 pt-4 flex justify-end gap-3 mt-6">
                 <button 
                   type="button" 

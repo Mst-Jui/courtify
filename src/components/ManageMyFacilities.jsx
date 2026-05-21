@@ -41,13 +41,13 @@ const ManageMyFacilities = async () => {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 py-6 sm:py-12 px-4 sm:px-6 lg:px-8 font-sans relative overflow-hidden">
-      {/* গ্লোয়িং ব্যাকগ্রাউন্ড ইফেক্টস */}
+      
       <div className="absolute top-20 left-10 w-72 h-72 sm:w-96 sm:h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-20 right-10 w-72 h-72 sm:w-96 sm:h-96 bg-teal-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* হেডার সেকশন */}
+        
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-white/10 pb-6 mb-6 sm:mb-8 gap-4">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-100">
@@ -67,7 +67,7 @@ const ManageMyFacilities = async () => {
           </div>
         </div>
 
-        {/* এম্পটি স্টেট */}
+        
         {(!data || data.length === 0) ? (
           <div className="text-center py-16 bg-slate-900/20 backdrop-blur-md rounded-2xl border border-white/10 px-4">
             <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-3 text-slate-500">
@@ -77,7 +77,7 @@ const ManageMyFacilities = async () => {
           </div>
         ) : (
           <>
-            {/* ডেক্সটপ ভিউ: টেবিল লেআউট (শুধুমাত্র lg স্ক্রিনের জন্য ভিজিবল) */}
+           
             <div className="hidden lg:block overflow-visible rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-md shadow-2xl">
               <table className="w-full border-collapse text-left text-sm table-auto">
                 <thead>
@@ -142,13 +142,13 @@ const ManageMyFacilities = async () => {
               </table>
             </div>
 
-            {/* মোবাইল এবং ট্যাবলেট ভিউ (sm & md) */}
+            {/* mobile & tablet  */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:hidden gap-4 sm:gap-6">
               {data.map((d) => (
                 <div key={d._id} className="bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-2xl p-4 sm:p-5 flex flex-col justify-between hover:border-white/20 transition-all shadow-xl">
                   <div className="space-y-4">
                     
-                    {/* কার্ড টপ */}
+                   
                     <div className="flex gap-3 sm:gap-4 items-center">
                       {d.image ? (
                         <Image
@@ -171,7 +171,7 @@ const ManageMyFacilities = async () => {
                       </div>
                     </div>
 
-                    {/* কার্ড ডিটেইলস */}
+                    
                     <div className="space-y-2.5 text-xs sm:text-sm text-slate-300 border-t border-b border-white/5 py-3">
                       <div className="flex items-center gap-2 text-slate-400">
                         <FaMapMarkerAlt className="text-emerald-400 flex-shrink-0" size={13} />
@@ -189,7 +189,7 @@ const ManageMyFacilities = async () => {
                         </div>
                       </div>
 
-                      {/* টাইম স্লটস */}
+                     
                       <div className="flex items-start gap-2 text-slate-400 pt-0.5">
                         <FaClock className="text-slate-400 mt-0.5 flex-shrink-0" size={13} />
                         <div className="flex flex-wrap gap-1 max-h-20 overflow-y-auto pr-1">
@@ -209,7 +209,7 @@ const ManageMyFacilities = async () => {
                     </div>
                   </div>
 
-                  {/* কার্ড অ্যাকশন বাটনসমূহ */}
+                  
                   <div className="flex items-center justify-end gap-2 pt-3 mt-auto">
                     <EditFacilities facility={d} />
                     <DeleteFacilities id={d._id} />

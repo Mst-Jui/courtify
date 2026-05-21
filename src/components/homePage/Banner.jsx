@@ -3,12 +3,12 @@ import Link from 'next/link';
 import React from 'react';
 
 const Banner = () => {
-  const handleScrollToFacilities = () => {
-    const facilitiesSection = document.getElementById('featured-facilities');
-    if (facilitiesSection) {
-      facilitiesSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  // const handleScrollToFacilities = () => {
+  //   const facilitiesSection = document.getElementById('featured-facilities');
+  //   if (facilitiesSection) {
+  //     facilitiesSection.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // };
 
   return (
     <div className="relative bg-neutral-800 text-white min-h-[85vh] flex items-center overflow-hidden">
