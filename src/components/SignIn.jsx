@@ -21,21 +21,30 @@ const SignIn = () => {
     const user = Object.fromEntries(formData.entries())
 
     console.log("USER", user);
-    
+
     const { data, error } = await authClient.signIn.email({
       email: user.email,
       password: user.password
     })
     console.log("DATA", data);
-    
+
     if (data) {
+      toast.success("SignIn successful")
       router.push('/')
     }
     if (error) {
       toast('Error from signin')
     }
-
   }
+
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  }
+
+
+
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-md w-full space-y-8 bg-slate-900 p-8 rounded-2xl shadow-xl border border-slate-800">
@@ -62,7 +71,7 @@ const SignIn = () => {
             onSubmit={onSubmit}
             className="mt-8 space-y-5">
 
-            
+
 
             {/* Email */}
             <div>
@@ -83,7 +92,7 @@ const SignIn = () => {
               </div>
             </div>
 
-          
+
 
             {/* Password */}
             <div>
@@ -130,7 +139,8 @@ const SignIn = () => {
 
         {/* Google */}
         <button
-          type="button"
+          onClick={handleGoogleSignIn}
+          // type="button"
           className="w-full py-2.5 px-4 border border-slate-700 hover:bg-slate-800 text-slate-300 font-medium rounded-xl flex items-center justify-center gap-2 transition-colors"
         >
           <FaGoogle className="text-red-400" />
