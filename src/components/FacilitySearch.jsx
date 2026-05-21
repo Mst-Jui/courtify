@@ -69,7 +69,7 @@ const FacilitySearch = () => {
 
       {/* Results Grid */}
       {loading ? (
-        <div className="text-center text-emerald-400 font-semibold py-10">Loading Arenas...</div>
+        <div className="text-center text-emerald-400 font-semibold py-10">Loading Arenas <span className="loading loading-dots loading-sm"></span></div>
       ) : facilities.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {facilities.map((facility) => (
