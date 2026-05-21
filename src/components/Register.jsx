@@ -1,6 +1,7 @@
 'use client'
 import { authClient } from '@/lib/auth-client';
-import { Button, Card } from '@heroui/react';
+import { Button, Card, Description, FieldError, Form, Input, Label, TextField } from '@heroui/react';
+// import { Form } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
 import React from 'react';
@@ -21,7 +22,7 @@ const Register = () => {
     const formData = new FormData(e.currentTarget)
     const user = Object.fromEntries(formData.entries())
 
-    console.log("USER", user);
+    // console.log("USER", user);
 
     const { data, error } = await authClient.signUp.email({
       email: user.email,
@@ -35,7 +36,7 @@ const Register = () => {
       // redirect('/')
     }
     if (error) {
-      toast('Invalid')
+      toast.error(error.message);
     }
   }
 
