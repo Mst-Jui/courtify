@@ -30,13 +30,19 @@ const Register = () => {
       image: user?.image
     })
     if (data) {
+      toast.success('SignUp successful')
       router.push('/signin')
       // redirect('/')
     }
     if (error) {
       toast('Invalid')
     }
+  }
 
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
   }
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans">
@@ -146,7 +152,7 @@ const Register = () => {
 
             {/* Button */}
             <Button
-              type="submit"             
+              type="submit"
               className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-medium  transition-colors shadow-lg shadow-emerald-900/20"
             >
               Sign Up
@@ -167,7 +173,8 @@ const Register = () => {
 
         {/* Google */}
         <button
-          type="button"
+          onClick={handleGoogleSignIn}
+          // type="button"
           className="w-full py-2.5 px-4 border border-slate-700 hover:bg-slate-800 text-slate-300 font-medium rounded-xl flex items-center justify-center gap-2 transition-colors"
         >
           <FaGoogle className="text-red-400" />
